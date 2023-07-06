@@ -1,5 +1,7 @@
 package org.veiset.libgdx
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
@@ -16,6 +18,7 @@ fun main() {
 class DodgeFallingSqueres: AppModule {
     private val shapeRenderer = globals.shapeRenderer
     private var lastBlockSpawnTime = TimeUtils.millis()
+    private var movementSpeed = 400f;
     private var player = Rectangle(
         position = Vector2(EngineConfig.VIEWPORT_WIDTH / 2f, 200f),
         size = Vector2(20f, 20f)
@@ -39,6 +42,23 @@ class DodgeFallingSqueres: AppModule {
      * not dependant of the update-rate.
      */
     private fun handlePlayerMovement(delta: Float) {
+        var movementFactor = delta * movementSpeed
+
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+            player = player.move(Vector2(0f, movementFactor))
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+           player = player.move(Vector2(0f, -movementFactor))
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            player = player.move(Vector2(-movementFactor, 0f))
+        }
+
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            player = player.move(Vector2(movementFactor, 0f))
+        }
 
     }
 
