@@ -27,7 +27,7 @@ class DodgeFallingSqueres: AppModule {
      * Use the utility method `drawRectangle` to draw on the screen.
      */
     private fun drawPlayer() {
-
+        drawRectangle(player, Color.RED)
     }
 
     /**
